@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>WizardsTome – Privacy &amp; Support</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    /* Light (default) */
+    :root {
+      --bg:       #f5f5f7;
+      --surface:  #ffffff;
+      --surface2: #f2f2f2;
+      --border:   rgba(0,0,0,0.08);
+      --border2:  rgba(0,0,0,0.14);
+      --text:     #1d1d1f;
+      --muted:    #6e6e73;
+      --subtle:   #aeaeb2;
+      --accent:   #7c5cff;
+      --accent2:  #6246ea;
+      --green:    #1a8a3a;
+      --yellow:   #9a6700;
+      --red:      #c0392b;
+      --nav-bg:   rgba(245,245,247,0.88);
+    }
+    /* Dark */
+    [data-theme="dark"] {
+      --bg:       #09090b;
+      --surface:  #111113;
+      --surface2: #18181b;
+      --border:   rgba(255,255,255,0.07);
+      --border2:  rgba(255,255,255,0.12);
+      --text:     #fafafa;
+      --muted:    #71717a;
+      --subtle:   #3f3f46;
+      --accent:   #8f7bff;
+      --accent2:  #a394ff;
+      --green:    #22c55e;
+      --yellow:   #eab308;
+      --red:      #ef4444;
+      --nav-bg:   rgba(9,9,11,0.85);
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── Nav ── */
+    nav {
+      position: sticky; top: 0; z-index: 50;
+      background: var(--nav-bg);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 24px;
+      height: 56px;
+      display: flex; align-items: center; justify-content: space-between;
+      max-width: 100%;
+    }
+    .theme-toggle {
+      display: flex; align-items: center;
+      background: var(--surface2); border: 1px solid var(--border2);
+      border-radius: 20px; padding: 3px; gap: 2px; margin-left: 8px;
+    }
+    .theme-toggle button {
+      background: none; border: none; cursor: pointer;
+      width: 28px; height: 24px; border-radius: 16px;
+      font-size: 13px; display: flex; align-items: center; justify-content: center;
+      color: var(--muted); transition: background 0.15s, color 0.15s;
+    }
+    .theme-toggle button.active {
+      background: var(--surface); color: var(--text);
+      box-shadow: 0 1px 3px rgba(0,0,0,0.15);
+    }
+    .nav-brand {
+      display: flex; align-items: center; gap: 10px;
+      font-size: 15px; font-weight: 700; color: var(--text);
+      text-decoration: none;
+    }
+    .nav-icon {
+      width: 28px; height: 28px; border-radius: 7px;
+      background: linear-gradient(135deg, var(--accent), #b56bff);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 14px;
+    }
+    .nav-links { display: flex; gap: 4px; }
+    .nav-link {
+      font-size: 13px; color: var(--muted); text-decoration: none;
+      padding: 6px 12px; border-radius: 6px; transition: color 0.15s, background 0.15s;
+    }
+    .nav-link:hover { color: var(--text); background: var(--surface2); }
+
+    /* ── Hero ── */
+    .hero { max-width: 720px; margin: 0 auto; padding: 80px 24px 56px; text-align: center; }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: rgba(124,92,255,0.12); border: 1px solid rgba(124,92,255,0.3);
+      color: var(--accent2); font-size: 12px; font-weight: 600;
+      padding: 5px 12px; border-radius: 20px; margin-bottom: 24px;
+      letter-spacing: 0.04em; text-transform: uppercase;
+    }
+    .hero h1 {
+      font-size: clamp(32px, 6vw, 52px);
+      font-weight: 800; line-height: 1.1; letter-spacing: -0.03em;
+      color: var(--text); margin-bottom: 16px;
+    }
+    [data-theme="dark"] .hero h1 {
+      background: linear-gradient(135deg, #fff 40%, #a1a1aa);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .hero p { font-size: 17px; color: var(--muted); line-height: 1.65; max-width: 500px; margin: 0 auto 36px; }
+    .hero-actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--accent); color: #fff; padding: 11px 22px; border-radius: 10px;
+      font-size: 14px; font-weight: 600; text-decoration: none; transition: opacity 0.15s;
+    }
+    .btn-primary:hover { opacity: 0.88; }
+    .btn-ghost {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--surface2); color: var(--text); border: 1px solid var(--border2);
+      padding: 11px 22px; border-radius: 10px; font-size: 14px; font-weight: 600;
+      text-decoration: none; transition: background 0.15s;
+    }
+
+    /* ── Page layout ── */
+    .page { max-width: 720px; margin: 0 auto; padding: 0 24px 96px; }
+    .section { margin-bottom: 60px; }
+    .section-label { font-size: 11px; font-weight: 700; color: var(--accent2); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 8px; }
+    .section-title { font-size: 28px; font-weight: 800; letter-spacing: -0.03em; margin-bottom: 6px; }
+    .section-desc { font-size: 14px; color: var(--muted); margin-bottom: 24px; line-height: 1.6; }
+    hr.divider { border: none; border-top: 1px solid var(--border); margin: 52px 0; }
+
+    /* ── Prose (privacy policy) ── */
+    .prose h3 { font-size: 16px; font-weight: 700; margin: 28px 0 8px; }
+    .prose h3:first-child { margin-top: 0; }
+    .prose p { font-size: 14.5px; color: var(--muted); line-height: 1.7; margin-bottom: 12px; }
+    .prose ul { margin: 0 0 12px 20px; }
+    .prose li { font-size: 14.5px; color: var(--muted); line-height: 1.7; margin-bottom: 6px; }
+    .prose strong { color: var(--text); }
+    .prose a { color: var(--accent2); }
+    .updated { font-size: 13px; color: var(--subtle); margin-bottom: 24px; }
+
+    /* ── Feature grid ── */
+    .feature-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    @media (max-width: 520px) { .feature-grid { grid-template-columns: 1fr; } }
+    .feature-card { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 18px; }
+    .feature-icon {
+      width: 34px; height: 34px; border-radius: 9px; background: var(--surface2);
+      border: 1px solid var(--border); display: flex; align-items: center; justify-content: center;
+      font-size: 17px; margin-bottom: 11px;
+    }
+    .feature-title { font-size: 14px; font-weight: 700; margin-bottom: 5px; }
+    .feature-desc { font-size: 13px; color: var(--muted); line-height: 1.55; }
+
+    /* ── Callout ── */
+    .callout {
+      display: flex; gap: 12px; align-items: flex-start;
+      background: rgba(124,92,255,0.06); border: 1px solid rgba(124,92,255,0.2);
+      border-radius: 10px; padding: 14px 16px; margin: 18px 0;
+    }
+    .callout-icon { font-size: 16px; flex-shrink: 0; margin-top: 1px; }
+    .callout p { font-size: 13px; color: var(--muted); line-height: 1.6; margin: 0; }
+    .callout strong { color: var(--text); }
+
+    /* ── Contact form ── */
+    .contact-form { display: flex; flex-direction: column; gap: 10px; margin-top: 4px; }
+    .contact-form input, .contact-form textarea, .contact-form select {
+      background: var(--surface2); border: 1px solid var(--border2);
+      border-radius: 8px; color: var(--text); font-size: 14px; font-family: inherit;
+      padding: 10px 14px; outline: none; transition: border-color 0.15s; width: 100%;
+    }
+    .contact-form input:focus, .contact-form textarea:focus, .contact-form select:focus { border-color: var(--accent); }
+    .contact-form input::placeholder, .contact-form textarea::placeholder { color: var(--subtle); }
+    .contact-form textarea { resize: vertical; min-height: 100px; }
+    .contact-form select option { background: var(--surface); }
+    .contact-submit {
+      background: var(--accent); color: #fff; border: none;
+      padding: 11px 22px; border-radius: 8px; font-size: 14px; font-weight: 600;
+      font-family: inherit; cursor: pointer; align-self: flex-start; transition: opacity 0.15s;
+    }
+    .contact-submit:hover { opacity: 0.88; }
+    .contact-submit:disabled { opacity: 0.5; cursor: not-allowed; }
+    .contact-success {
+      display: none; background: rgba(34,197,94,0.08);
+      border: 1px solid rgba(34,197,94,0.2); color: var(--green);
+      border-radius: 8px; padding: 12px 16px; font-size: 14px; margin-top: 10px;
+    }
+    footer { border-top: 1px solid var(--border); padding: 28px 24px; text-align: center; font-size: 13px; color: var(--subtle); }
+    footer a { color: var(--muted); text-decoration: none; }
+    footer a:hover { color: var(--text); }
+  </style>
+</head>
+<body>
+
+  <!-- Nav -->
+  <nav>
+    <a class="nav-brand" href="#">
+      <div class="nav-icon">📖</div>
+      WizardsTome
+    </a>
+    <div style="display:flex;align-items:center;">
+      <div class="nav-links">
+        <a class="nav-link" href="#features">Features</a>
+        <a class="nav-link" href="#privacy">Privacy</a>
+        <a class="nav-link" href="#ai">AI Covers</a>
+        <a class="nav-link" href="#contact">Contact</a>
+      </div>
+      <div class="theme-toggle">
+        <button id="btnLight" class="active" onclick="setTheme('light')" title="Light">☀️</button>
+        <button id="btnDark" onclick="setTheme('dark')" title="Dark">🌙</button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <div class="hero">
+    <div class="hero-badge">✦ Private · Offline · No ads</div>
+    <h1>Your library. Your device. Nobody else's business.</h1>
+    <p>WizardsTome is a full-featured reader for your own EPUB, PDF, comic, image, and text files — completely offline, with no account, no tracking, and no ads.</p>
+    <div class="hero-actions">
+      <a class="btn-primary" href="#privacy">Read the Privacy Policy</a>
+      <a class="btn-ghost" href="#contact">Report an Issue ↓</a>
+    </div>
+  </div>
+
+  <div class="page">
+
+    <!-- Features -->
+    <div class="section" id="features">
+      <div class="section-label">What's inside</div>
+      <div class="section-title">Everything in one reader</div>
+      <div class="section-desc">You bring the files — the app just opens them and makes them look great. Everything stays on your device.</div>
+      <div class="feature-grid">
+        <div class="feature-card"><div class="feature-icon">📚</div><div class="feature-title">Your formats</div><div class="feature-desc">EPUB, PDF, CBZ/ZIP comics &amp; manga, loose images, TXT and HTML.</div></div>
+        <div class="feature-card"><div class="feature-icon">🎨</div><div class="feature-title">Themes &amp; fonts</div><div class="feature-desc">Eight reading palettes, multiple typefaces, spacing, margins, and real screen brightness.</div></div>
+        <div class="feature-card"><div class="feature-icon">🎧</div><div class="feature-title">Read-aloud</div><div class="feature-desc">Text-to-speech with a voice picker, sleep timer, and a floating player.</div></div>
+        <div class="feature-card"><div class="feature-icon">📖</div><div class="feature-title">Offline dictionary</div><div class="feature-desc">Tap a word for its meaning — instant and offline, with an optional online fallback.</div></div>
+        <div class="feature-card"><div class="feature-icon">🖍️</div><div class="feature-title">Highlights &amp; notes</div><div class="feature-desc">Highlight passages, add comments, and bookmark your spots — all on-device.</div></div>
+        <div class="feature-card"><div class="feature-icon">🔒</div><div class="feature-title">Truly private</div><div class="feature-desc">No account, no servers, no analytics, no ads. Your files never leave your phone.</div></div>
+      </div>
+    </div>
+
+    <hr class="divider">
+
+    <!-- Privacy Policy -->
+    <div class="section prose" id="privacy">
+      <div class="section-label">Legal</div>
+      <div class="section-title">Privacy Policy</div>
+      <p class="updated">Last updated: 8 July 2026</p>
+
+      <h3>The short version</h3>
+      <p>WizardsTome is built to be <strong>private by default</strong>. It has no user accounts, no advertising, and no analytics or tracking. We do not run a server that stores your data, and we do not collect, sell, or share any personal information. Your books, reading progress, bookmarks, highlights, notes, and settings all live <strong>only on your device</strong>.</p>
+
+      <h3>The files you open</h3>
+      <p>You add your own files through your device's standard file picker or the system share sheet. The app reads only the files you explicitly choose. These files, and everything you create from them (progress, bookmarks, highlights, notes), stay on your device and are <strong>never uploaded</strong> anywhere by us.</p>
+
+      <h3>Information we collect</h3>
+      <p><strong>None.</strong> WizardsTome does not collect or transmit any personal or usage data to us. We have no analytics SDK, no crash-reporting service that identifies you, and no advertising.</p>
+
+      <h3>Optional features that use the internet</h3>
+      <p>There are exactly two features that make a network request, and <strong>only when you actively trigger them</strong>. In both cases we do not operate a server, and we do not store or log the request — it goes directly from your device to a third-party service.</p>
+      <ul>
+        <li><strong>Online dictionary fallback.</strong> The app ships with an offline dictionary. If you look up a word that isn't in it, the single word is sent to the free <a href="https://dictionaryapi.dev" target="_blank" rel="noopener">Free Dictionary API (dictionaryapi.dev)</a> to fetch a definition. Only that word is sent — nothing about you or your library.</li>
+        <li><strong>AI cover generation.</strong> If you tap "Generate art cover," the book's <em>title</em> is sent to the free image service <a href="https://pollinations.ai" target="_blank" rel="noopener">Pollinations.ai</a> to create a cover image. Only the title is sent.</li>
+      </ul>
+      <p>These are the only times any information leaves your device. Each third-party service processes your request under its own privacy policy. If you never use these features, WizardsTome makes no network requests at all.</p>
+
+      <h3>Permissions</h3>
+      <p>WizardsTome does not request broad storage access. It reads files through the Android document picker and the share sheet only. It does not access your location, contacts, camera, microphone, or photos beyond the specific images you choose to import.</p>
+
+      <h3>Children's privacy</h3>
+      <p>WizardsTome does not knowingly collect any information from anyone, including children under 13. Because we collect no data at all, there is nothing to collect from a child either.</p>
+
+      <h3>Data retention &amp; deletion</h3>
+      <p>Because your data lives on your device, you are in full control. Uninstalling the app, or clearing its storage in your device settings, permanently removes everything the app holds. We hold nothing to delete on our end.</p>
+
+      <h3>Changes to this policy</h3>
+      <p>If this policy changes, we will update it on this page and revise the date above. Material changes will be reflected here before they take effect.</p>
+
+      <h3>Contact</h3>
+      <p>Questions about privacy? Email <a href="mailto:bghoraani@fau.edu">bghoraani@fau.edu</a> or use the form below.</p>
+    </div>
+
+    <hr class="divider">
+
+    <!-- AI Content -->
+    <div class="section" id="ai">
+      <div class="section-label">AI-generated content</div>
+      <div class="section-title">About AI covers</div>
+      <div class="section-desc">For books without their own artwork, you can optionally generate a cover image with a free AI service. This is always your choice, and the app defaults to clean, offline-generated covers.</div>
+      <div class="callout">
+        <span class="callout-icon">🚩</span>
+        <p><strong>Report an image.</strong> If an AI-generated cover ever produces something offensive or inappropriate, tap <strong>"Report image"</strong> in the cover preview to discard it and flag it. We use safety filtering and take reports seriously — you can also email us using the form below.</p>
+      </div>
+    </div>
+
+    <hr class="divider">
+
+    <!-- Contact -->
+    <div class="section" id="contact">
+      <div class="section-label">Contact</div>
+      <div class="section-title">Report an issue or reach out</div>
+      <div class="section-desc">Found a bug, want a feature, or need to report content? Send us a note. You can also email <a href="mailto:bghoraani@fau.edu" style="color:var(--accent2);">bghoraani@fau.edu</a>.</div>
+      <form class="contact-form" onsubmit="submitReport(event)">
+        <input type="email" id="reportEmail" placeholder="Your email (optional)" autocomplete="email" />
+        <select id="reportType">
+          <option value="bug">🐛 Bug report</option>
+          <option value="feature">✨ Feature request</option>
+          <option value="content">🚩 Report content / AI image</option>
+          <option value="privacy">🔒 Privacy question</option>
+          <option value="other">💬 Other</option>
+        </select>
+        <textarea id="reportBody" placeholder="Describe it in detail…" required></textarea>
+        <button type="submit" class="contact-submit" id="reportSubmit">Send</button>
+      </form>
+      <div class="contact-success" id="contactSuccess">✓ Sent — thanks! We'll look into it.</div>
+    </div>
+
+  </div><!-- /page -->
+
+  <footer>
+    <p style="margin-bottom:6px;">WizardsTome &copy; 2026</p>
+    <p><a href="#privacy">Privacy Policy</a> &nbsp;&middot;&nbsp; <a href="#contact">Report a Bug</a></p>
+  </footer>
+
+  <script>
+    function submitReport(e) {
+      e.preventDefault();
+      var btn = document.getElementById('reportSubmit');
+      var body = document.getElementById('reportBody').value.trim();
+      if (!body) return;
+      btn.disabled = true;
+      btn.textContent = 'Sending…';
+      var type = document.getElementById('reportType').value;
+      var email = document.getElementById('reportEmail').value.trim();
+      fetch('https://formspree.io/f/mrejkyrd', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify(Object.assign({ app: 'WizardsTome', type: type, message: body }, email ? { email: email } : {}))
+      })
+      .then(function(r) { return r.json(); })
+      .then(function(data) {
+        if (data.ok) {
+          document.getElementById('contactSuccess').style.display = 'block';
+          document.getElementById('reportBody').value = '';
+          document.getElementById('reportEmail').value = '';
+        } else { alert('Something went wrong. Please try again.'); }
+      })
+      .catch(function() { alert('Network error. Please try again.'); })
+      .finally(function() { btn.disabled = false; btn.textContent = 'Send'; });
+    }
+
+    function setTheme(t) {
+      document.documentElement.setAttribute('data-theme', t);
+      document.getElementById('btnLight').classList.toggle('active', t === 'light');
+      document.getElementById('btnDark').classList.toggle('active', t === 'dark');
+      localStorage.setItem('wt-theme', t);
+    }
+    setTheme(localStorage.getItem('wt-theme') || 'light');
+  </script>
+</body>
+</html>
